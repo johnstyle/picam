@@ -5,15 +5,13 @@ import datetime
 import os
 
 ROOT_PATH = "/var/www/html"
-DATE_FMT = "%Y_%m_%d_%H_%M_%S"
-SEGMENT_TIME = 30
+SEGMENT_TIME = 60
 ENCODING = "copy"
 
-new_dir = datetime.datetime.now().strftime(DATE_FMT)
-recording_path = os.path.join(ROOT_PATH, new_dir)
+recording_path = os.path.join(ROOT_PATH, datetime.datetime.now().strftime("%Y%m%d"))
 os.mkdir(recording_path)
 
-segments_path = os.path.join(recording_path, "%03d.mp4")
+segments_path = os.path.join(recording_path, "{}_%03d.mp4".format(datetime.datetime.now().strftime("%Y%m%d")))
 
 command = "ffmpeg -i /dev/video0 -c:v {} -an -sn -dn -segment_time {} -f segment {}".format(ENCODING, SEGMENT_TIME, segments_path)
 
