@@ -8,7 +8,7 @@ ROOT_PATH = "/var/www/html"
 SEGMENT_TIME = 10
 
 recording_path = os.path.join(ROOT_PATH, datetime.datetime.now().strftime("%Y%m%d"))
-os.mkdir(recording_path)
+os.makedirs(recording_path)
 
 segments_path = os.path.join(recording_path, "{}_%03d.avi".format(datetime.datetime.now().strftime("%H%M%S")))
 
